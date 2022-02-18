@@ -147,10 +147,10 @@ def main():
             try:
                 if error != last_error:
                     send_message(bot, str(error))
-                    last_error = str(error)
             except Exception as error:
                 message = f'Сбой в работе программы: {error}'
                 logger.error(message)
+                last_error = str(error)
         else:
             current_timestamp = response['current_date']
         finally:
