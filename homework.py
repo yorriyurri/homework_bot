@@ -42,6 +42,7 @@ def send_message(bot, message):
         bot.send_message(chat_id=TELEGRAM_CHAT_ID, text=message)
     except telegram.TelegramError:
         logger.error(f'Сбой при отправке сообщения "{message}" в Telegram.')
+        raise telegram.TelegramError
     else:
         logger.info(f'Бот отправил сообщение "{message}"')
 
@@ -56,6 +57,9 @@ def get_api_answer(current_timestamp):
         logger.error(
             f'Сбой при запросе к эндпоинту: {ENDPOINT}'
         )
+        raise requests.exceptions.RequestException(
+            f'Сбой при запросе к эндпоинту: {ENDPOINT}'
+        )
     else:
         if response.status_code != HTTPStatus.OK.value:
             logger.error(
@@ -63,9 +67,7 @@ def get_api_answer(current_timestamp):
                 f'Эндпоинт {ENDPOINT} недоступен. '
                 f'Код ответа API: {response.status_code}'
             )
-            raise requests.exceptions.RequestException(
-                'Статус код ответа API не равен 200'
-            )
+            raise ('Статус код ответа API не равен 200')
         return response.json()
 
 
@@ -100,6 +102,10 @@ def parse_status(homework):
     else:
         if homework_status not in HOMEWORK_STATUSES:
             logger.error(
+                f'Статус {homework_status} работы '
+                f'"{homework_name}" недокументирован.'
+            )
+            raise (
                 f'Статус {homework_status} работы '
                 f'"{homework_name}" недокументирован.'
             )
