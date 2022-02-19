@@ -157,7 +157,7 @@ def main():
             message = COMMON_ERROR.format(error=error)
             logger.error(COMMON_ERROR.format(error=error))
             if message != last_error:
-                send_message(bot, str(error))
+                send_message(bot, message)
                 last_error = message
         else:
             current_timestamp = response['current_date']
