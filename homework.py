@@ -151,8 +151,9 @@ def main():
         try:
             response = get_api_answer(current_timestamp)
             homeworks = check_response(response)
-            verdict = parse_status(homeworks[0])
-            send_message(bot, verdict)
+            if homeworks:
+                verdict = parse_status(homeworks[0])
+                send_message(bot, verdict)
         except Exception as error:
             message = COMMON_ERROR.format(error=error)
             logger.error(COMMON_ERROR.format(error=error))
