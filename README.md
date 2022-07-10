@@ -30,7 +30,7 @@ python3 -m venv venv
 source venv/bin/activate
 ```
 
-### Установить зависимостиЖ
+### Установить зависимости:
 
 ```python
 docker-compose exec web python manage.py migrate
