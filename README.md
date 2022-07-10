@@ -33,12 +33,6 @@ source venv/bin/activate
 ### Установить зависимости:
 
 ```python
-docker-compose exec web python manage.py migrate
-```
-
-### Создать суперпользователя:
-
-```python
 python3 -m pip install --upgrade pip
 
 pip install -r requirements.txt
